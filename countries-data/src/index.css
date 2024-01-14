@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: large;
+  font-family: "Heebo", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  width: 970px;
+  margin: auto;
+}
+
+.main-container {
+  width: 970px;
+}
+
+.bar-row {
+  display: flex;
+  padding: 10px 0;
+}
+
+.bar-country {
+  width: 20%;
+  padding: 5px 5px;
+  text-align: center;
+}
+.bar-chart {
+  display: flex;
+  width: 70%;
+  margin: 0 15px;
+}
+.bar-population {
+  padding: 5px 5px;
+  display: flex;
+  width: 20%;
+}
