@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import "./NavBar.css";
