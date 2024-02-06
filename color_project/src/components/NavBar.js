@@ -1,7 +1,8 @@
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import "./NavBar.css";
-export default function Navbar({ level, changeLevel }) {
+export default function Navbar({ level, changeLevel, changeFormat, format }) {
   return (
     <header className="Navbar">
       <div className="logo">
@@ -30,6 +31,15 @@ export default function Navbar({ level, changeLevel }) {
             onChange={(level) => changeLevel(level)}
           />
         </div>
+      </div>
+      <div className="select-container">
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <Select value={format} onChange={changeFormat}>
+            <MenuItem value="hex">HEX - #ffffff</MenuItem>
+            <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
+            <MenuItem value="rgba">RGB - rgba(255,255,255,1)</MenuItem>
+          </Select>
+        </FormControl>
       </div>
     </header>
   );
