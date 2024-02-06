@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Palette from "./components/Palette";
 import PaletteWrapper from "./components/PaletteWrapper";
+import PaletteList from "./components/PaletteList";
+import seedColors from "./utils/seedColors";
 
 export default function App() {
   return (
     <Routes>
-      <Route exact path="/" element={<h1>PALETTE LIST GOES HERE</h1>} />
+      <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
       <Route exact path="/palette/:id" element={<PaletteWrapper />} />
     </Routes>
   );

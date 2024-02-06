@@ -2,11 +2,12 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 export default function Navbar({ level, changeLevel, changeFormat, format }) {
   return (
     <header className="Navbar">
       <div className="logo">
-        <a href="#">ReactColorPicker</a>
+        <Link to="/">ReactColorPicker</Link>
       </div>
       <div className="slider-container">
         <span>Level: {level}</span>
