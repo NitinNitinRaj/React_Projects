@@ -5,7 +5,7 @@ import ColorBox from "./ColorBox";
 import Navbar from "./NavBar";
 import "./Palette.css";
 
-export default function Palette({ palette: { colors } }) {
+export default function Palette({ palette: { colors, paletteName, emoji } }) {
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
   const [open, setOpen] = useState(false);
@@ -29,8 +29,8 @@ export default function Palette({ palette: { colors } }) {
 
   const action = (
     <React.Fragment>
-      <IconButton color="inherit" key="close">
-        <MdClose onClick={() => setOpen(false)} />
+      <IconButton color="inherit" key="close" onClick={() => setOpen(false)}>
+        <MdClose />
       </IconButton>
     </React.Fragment>
   );
@@ -44,7 +44,10 @@ export default function Palette({ palette: { colors } }) {
         format={format}
       />
       <div className="Palette-colors">{colorBoxes}</div>
-      {/* footer here */}
+      <footer className="palette-footer">
+        {paletteName}
+        {/* <span className="emoji">{emoji}</span> */}
+      </footer>
       <Snackbar
         open={open}
         autoHideDuration={5000}
