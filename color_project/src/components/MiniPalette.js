@@ -1,4 +1,10 @@
-export default function MiniPalette({ paletteName, emoji, colors }) {
+export default function MiniPalette({
+  paletteName,
+  emoji,
+  colors,
+  handleClick,
+  id,
+}) {
   const miniColorBoxes = colors.map(({ name, color }) => (
     <div
       key={name}
@@ -8,7 +14,10 @@ export default function MiniPalette({ paletteName, emoji, colors }) {
   ));
 
   return (
-    <div className="bg-white border border-solid border-black rounded p-2 relative overflow-hidden hover:cursor-pointer h-[150px]">
+    <div
+      onClick={() => handleClick(id)}
+      className="bg-white border border-solid border-black rounded p-2 relative overflow-hidden hover:cursor-pointer h-[150px]"
+    >
       <div className="bg-[#dae1e4] h-[105px] w-full rounded overflow-hidden">
         {miniColorBoxes}
       </div>
