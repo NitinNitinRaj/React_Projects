@@ -5,7 +5,9 @@ import ColorBox from "./ColorBox";
 import Navbar from "./NavBar";
 import "./Palette.css";
 
-export default function Palette({ palette: { colors, paletteName, emoji } }) {
+export default function Palette({
+  palette: { colors, paletteName, id, emoji },
+}) {
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
   const [open, setOpen] = useState(false);
@@ -13,7 +15,12 @@ export default function Palette({ palette: { colors, paletteName, emoji } }) {
     return (
       <ColorBox
         key={color.name}
-        background={{ color: color[format], name: color.name }}
+        background={{
+          color: color[format],
+          name: color.name,
+          colorId: color.id,
+          paletteId: id,
+        }}
       />
     );
   });

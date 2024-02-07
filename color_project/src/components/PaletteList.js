@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 
 export default function PaletteList({ palettes }) {
