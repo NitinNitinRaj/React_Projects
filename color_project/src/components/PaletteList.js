@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MiniPalette from "./MiniPalette";
 
 export default function PaletteList({ palettes }) {
   return (
@@ -6,7 +7,7 @@ export default function PaletteList({ palettes }) {
       <h1>React Colors</h1>
       {palettes.map((palette) => (
         <p>
-          <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
+          <MiniPalette {...palette} />
         </p>
       ))}
     </div>
