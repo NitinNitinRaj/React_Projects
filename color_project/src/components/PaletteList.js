@@ -10,9 +10,7 @@ export default function PaletteList({ palettes }) {
         </nav>
         <div className="box-border w-full grid grid-cols-3 gap-[5%]">
           {palettes.map((palette) => (
-            <p>
-              <MiniPalette {...palette} />
-            </p>
+            <MiniPalette key={palette.paletteName} {...palette} />
           ))}
         </div>
       </div>
