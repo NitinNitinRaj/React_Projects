@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 import ColorBox from "./ColorBox";
 import Navbar from "./NavBar";
 import "./Palette.css";
+import PaletteFooter from "./PaletteFooter";
 
 export default function Palette({
   palette: { colors, paletteName, id, emoji },
@@ -50,12 +51,10 @@ export default function Palette({
         level={level}
         changeFormat={changeFormat}
         format={format}
+        slider
       />
       <div className="Palette-colors">{colorBoxes}</div>
-      <footer className="palette-footer">
-        {paletteName}
-        {/* <span className="emoji">{emoji}</span> */}
-      </footer>
+      <PaletteFooter paletteName={paletteName} emoji={emoji} />
       <Snackbar
         open={open}
         autoHideDuration={5000}

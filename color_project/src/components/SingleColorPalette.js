@@ -1,10 +1,16 @@
+import { useState } from "react";
 import ColorBox from "./ColorBox";
+import Navbar from "./NavBar";
+import Palette from "./Palette";
+import PaletteFooter from "./PaletteFooter";
 
 export default function SingleColorPalette({
-  palette: { colors },
+  palette: { colors, paletteName, emoji },
   colorId,
   paletteId,
 }) {
+  const [format, setFormat] = useState("hex");
+
   const gatherShade = () => {
     let shades = [];
     for (let key in colors) {
@@ -18,16 +24,26 @@ export default function SingleColorPalette({
     return (
       <ColorBox
         key={color.name}
-        background={{ color: color.hex, name: color.name, paletteId, colorId }}
+        background={{
+          color: color[format],
+          name: color.name,
+          paletteId,
+          colorId,
+        }}
         showLink={false}
       />
     );
   });
 
+  const changeFormat = (e) => {
+    setFormat(e.target.value);
+  };
+
   return (
     <div className="Palette">
-      <h1>SingleColorPalette</h1>
+      <Navbar changeFormat={changeFormat} format={format} slider={false} />
       <div className="Palette-colors">{colorBoxes}</div>
+      <PaletteFooter paletteName={paletteName} emoji={emoji} />
     </div>
   );
 }
