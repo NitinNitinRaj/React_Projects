@@ -3,6 +3,7 @@ import ColorBox from "./ColorBox";
 import Navbar from "./NavBar";
 import Palette from "./Palette";
 import PaletteFooter from "./PaletteFooter";
+import { Link } from "react-router-dom";
 
 export default function SingleColorPalette({
   palette: { colors, paletteName, emoji },
@@ -40,9 +41,16 @@ export default function SingleColorPalette({
   };
 
   return (
-    <div className="Palette">
+    <div className="SingleColorPalette Palette">
       <Navbar changeFormat={changeFormat} format={format} slider={false} />
-      <div className="Palette-colors">{colorBoxes}</div>
+      <div className="Palette-colors">
+        {colorBoxes}
+        <div className="go-back ColorBox">
+          <Link to={`/palette/${paletteId}`} className="back-button">
+            Go Back
+          </Link>
+        </div>
+      </div>
       <PaletteFooter paletteName={paletteName} emoji={emoji} />
     </div>
   );
