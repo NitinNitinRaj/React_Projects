@@ -21,6 +21,7 @@ export default function Palette({
           colorId: color.id,
           paletteId: id,
         }}
+        showLink={true}
       />
     );
   });

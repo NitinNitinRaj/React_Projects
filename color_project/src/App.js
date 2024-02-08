@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import PaletteWrapper from "./components/PaletteWrapper";
 import PaletteList from "./components/PaletteList";
+import PaletteWrapper from "./components/PaletteWrapper";
+import SingleColorPaletteWrapper from "./components/SingleColorPaletteWrapper";
 import seedColors from "./utils/seedColors";
-import SingleColorPalette from "./components/SingleColorPalette";
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
       <Route
         exact
         path="/palette/:paletteId/:colorId"
-        element={<SingleColorPalette />}
+        element={<SingleColorPaletteWrapper />}
       />
     </Routes>
   );
