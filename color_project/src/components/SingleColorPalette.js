@@ -1,9 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./NavBar";
-import Palette from "./Palette";
 import PaletteFooter from "./PaletteFooter";
-import { Link } from "react-router-dom";
 
 export default function SingleColorPalette({
   palette: { colors, paletteName, emoji },
