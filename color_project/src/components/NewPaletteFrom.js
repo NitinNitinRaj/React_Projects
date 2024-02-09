@@ -11,14 +11,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
-import { ChromePicker } from "react-color";
+import Chrome from "@uiw/react-color-chrome";
+import DraggableColorBox from "./DraggableColorBox";
 
 const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -63,7 +63,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function NewPaletteForm() {
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState("#fff");
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState(["purple", "#e15764"]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -74,7 +74,11 @@ export default function NewPaletteForm() {
   };
 
   const updateCurrentColor = (newColor) => {
-    setCurrentColor(newColor.hex);
+    setCurrentColor(newColor.hexa);
+  };
+
+  const addNewColor = () => {
+    setColors([...colors, currentColor]);
   };
 
   return (
@@ -124,20 +128,26 @@ export default function NewPaletteForm() {
             Random Color
           </Button>
         </div>
-        <ChromePicker
+        <Chrome
           color={currentColor}
-          onChangeComplete={(newColor) => updateCurrentColor(newColor)}
+          onChange={(newColor) => updateCurrentColor(newColor)}
         />
         <Button
           style={{ backgroundColor: currentColor }}
           variant="contained"
           color="primary"
+          onClick={addNewColor}
         >
           Add Color
         </Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
+        <ul style={{ height: "calc(100vh - 64px)" }}>
+          {colors.map((color) => (
+            <DraggableColorBox key={color} color={color} />
+          ))}
+        </ul>
       </Main>
     </Box>
   );
