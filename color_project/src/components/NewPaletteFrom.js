@@ -1,6 +1,12 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Button } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+} from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,8 +16,8 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import { useState } from "react";
 import Chrome from "@uiw/react-color-chrome";
+import { useState } from "react";
 import DraggableColorBox from "./DraggableColorBox";
 
 const drawerWidth = 400;
@@ -63,7 +69,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function NewPaletteForm() {
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState("#fff");
-  const [colors, setColors] = useState(["purple", "#e15764"]);
+  const [colors, setColors] = useState([
+    { name: "purple", color: "purple" },
+    { name: "#e15764", color: "#e15764" },
+  ]);
+  const [newName, setNewName] = useState("");
+  const [error, setError] = useState();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -78,7 +89,20 @@ export default function NewPaletteForm() {
   };
 
   const addNewColor = () => {
-    setColors([...colors, currentColor]);
+    if (!newName.length) return setError("empty");
+
+    if (
+      colors.find((color) => color.name.toLowerCase() === newName.toLowerCase())
+    )
+      return setError("exits");
+
+    setError(null);
+    setColors([...colors, { name: newName, color: currentColor }]);
+    setNewName("");
+  };
+
+  const handleNewNameChange = (e) => {
+    setNewName(e.target.value);
   };
 
   return (
@@ -132,20 +156,39 @@ export default function NewPaletteForm() {
           color={currentColor}
           onChange={(newColor) => updateCurrentColor(newColor)}
         />
-        <Button
-          style={{ backgroundColor: currentColor }}
-          variant="contained"
-          color="primary"
-          onClick={addNewColor}
-        >
-          Add Color
-        </Button>
+        <FormControl error={error && true} variant="standard">
+          <InputLabel htmlFor="component-error">New Color</InputLabel>
+          <Input
+            id="component-error"
+            value={newName}
+            aria-describedby="component-error-text"
+            onChange={handleNewNameChange}
+          />
+          {error && (
+            <FormHelperText id="component-error-text">
+              {error === "exits" ? "Color already Used!" : "Enter a Color"}
+            </FormHelperText>
+          )}
+
+          <Button
+            style={{ backgroundColor: currentColor }}
+            variant="contained"
+            color="primary"
+            onClick={addNewColor}
+          >
+            Add Color
+          </Button>
+        </FormControl>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
         <ul style={{ height: "calc(100vh - 64px)" }}>
           {colors.map((color) => (
-            <DraggableColorBox key={color} color={color} />
+            <DraggableColorBox
+              key={color.color}
+              color={color.color}
+              name={color.name}
+            />
           ))}
         </ul>
       </Main>
