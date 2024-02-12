@@ -18,8 +18,8 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Chrome from "@uiw/react-color-chrome";
 import { useState } from "react";
-import DraggableColorBox from "./DraggableColorBox";
 import { useNavigate } from "react-router-dom";
+import DraggableColorList from "./DraggableColorList";
 
 const drawerWidth = 400;
 
@@ -67,15 +67,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function NewPaletteForm({ savePalette }) {
+export default function NewPaletteForm({ savePalette, palettes }) {
+  const maxPalette = 20;
   const [open, setOpen] = useState(false);
-  const [currentColor, setCurrentColor] = useState("#fff");
-  const [colors, setColors] = useState([
-    { name: "purple", color: "purple" },
-    { name: "#e15764", color: "#e15764" },
-  ]);
+  const [currentColor, setCurrentColor] = useState("#abcdef");
+  const [colors, setColors] = useState(palettes[0].colors);
   const [newName, setNewName] = useState("");
   const [error, setError] = useState();
+  const [newPaletteName, setNewPaletteName] = useState("");
+  const [formNameError, setFormNameError] = useState();
+
+  const paletteIsFull = colors.length >= maxPalette;
 
   const navigate = useNavigate();
 
@@ -108,14 +110,42 @@ export default function NewPaletteForm({ savePalette }) {
     setNewName(e.target.value);
   };
 
+  const handlePaletteNameChange = (e) => {
+    setNewPaletteName(e.target.value);
+    setFormNameError(null);
+  };
+
   const handleSavePalette = () => {
-    let paletteName = "New Test Palette";
+    if (!newPaletteName.length) return setFormNameError("empty");
+    if (
+      palettes.find(
+        (palette) =>
+          palette.paletteName.toLowerCase() === newPaletteName.toLowerCase()
+      )
+    )
+      return setFormNameError("exits");
     savePalette({
-      id: paletteName.toLowerCase().replace(/ /g, "-"),
-      paletteName: paletteName,
+      id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+      paletteName: newPaletteName,
       colors,
     });
     navigate("/");
+  };
+
+  const deleteColor = (colorToDelete) => {
+    setColors(colors.filter(({ name }) => name !== colorToDelete));
+  };
+
+  const clearColors = () => {
+    setColors([]);
+  };
+
+  const addRandomColor = () => {
+    let allColors = palettes.map((p) => p.colors).flat();
+    setColors([
+      ...colors,
+      allColors[Math.floor(Math.random() * allColors.length)],
+    ]);
   };
 
   return (
@@ -135,6 +165,22 @@ export default function NewPaletteForm({ savePalette }) {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <FormControl error={formNameError && true} variant="standard">
+            <InputLabel htmlFor="component-error">Palette Name</InputLabel>
+            <Input
+              id="component-error"
+              value={newPaletteName}
+              aria-describedby="component-error-text"
+              onChange={handlePaletteNameChange}
+            />
+            {formNameError && (
+              <FormHelperText id="component-error-text">
+                {formNameError === "exits"
+                  ? "Palette Name already Used!"
+                  : "Enter Palette Name"}
+              </FormHelperText>
+            )}
+          </FormControl>
           <Button
             variant="contained"
             color="primary"
@@ -165,10 +211,15 @@ export default function NewPaletteForm({ savePalette }) {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={clearColors}>
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addRandomColor}
+            disabled={paletteIsFull}
+          >
             Random Color
           </Button>
         </div>
@@ -191,25 +242,24 @@ export default function NewPaletteForm({ savePalette }) {
           )}
 
           <Button
-            style={{ backgroundColor: currentColor }}
+            style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
             variant="contained"
             color="primary"
             onClick={addNewColor}
+            disabled={paletteIsFull}
           >
-            Add Color
+            {paletteIsFull ? "Palette Is Full" : "Add Color"}
           </Button>
         </FormControl>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
         <ul style={{ height: "calc(100vh - 64px)" }}>
-          {colors.map((color) => (
-            <DraggableColorBox
-              key={color.color}
-              color={color.color}
-              name={color.name}
-            />
-          ))}
+          <DraggableColorList
+            colors={colors}
+            deleteColor={deleteColor}
+            setColors={setColors}
+          />
         </ul>
       </Main>
     </Box>

@@ -17,7 +17,9 @@ export default function App() {
       <Route
         exact
         path="/palette/new"
-        element={<NewPaletteForm savePalette={savePalette} />}
+        element={
+          <NewPaletteForm savePalette={savePalette} palettes={palettes} />
+        }
       />
       <Route
         exact

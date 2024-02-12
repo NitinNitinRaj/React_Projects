@@ -15,7 +15,7 @@ export default function PaletteList({ palettes }) {
           <h1 className="text-lg">React Colors</h1>
           <Link to="/palette/new">Create Palette </Link>
         </nav>
-        <div className="box-border w-full grid grid-cols-3 gap-[5%]">
+        <div className="box-border w-full grid grid-cols-3 gap-[5%] overflow-y-auto h-[calc(100vh-65px)]">
           {palettes.map((palette) => (
             <MiniPalette
               key={palette.paletteName}
