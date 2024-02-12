@@ -19,6 +19,7 @@ import { styled } from "@mui/material/styles";
 import Chrome from "@uiw/react-color-chrome";
 import { useState } from "react";
 import DraggableColorBox from "./DraggableColorBox";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 400;
 
@@ -66,7 +67,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm({ savePalette }) {
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState("#fff");
   const [colors, setColors] = useState([
@@ -75,6 +76,8 @@ export default function NewPaletteForm() {
   ]);
   const [newName, setNewName] = useState("");
   const [error, setError] = useState();
+
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,10 +108,20 @@ export default function NewPaletteForm() {
     setNewName(e.target.value);
   };
 
+  const handleSavePalette = () => {
+    let paletteName = "New Test Palette";
+    savePalette({
+      id: paletteName.toLowerCase().replace(/ /g, "-"),
+      paletteName: paletteName,
+      colors,
+    });
+    navigate("/");
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} color="default">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -122,6 +135,13 @@ export default function NewPaletteForm() {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSavePalette}
+          >
+            Submit
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
