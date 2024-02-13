@@ -5,6 +5,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+
 import { useState } from "react";
 
 export default function PaletteMetaForm({
@@ -36,6 +39,7 @@ export default function PaletteMetaForm({
           <DialogContentText>
             Please enter a name for your new palette. Make sure it's unique!.
           </DialogContentText>
+          <Picker data={data} onEmojiSelect={console.log} theme="light" />
           <FormControl
             error={formNameError && true}
             variant="standard"
