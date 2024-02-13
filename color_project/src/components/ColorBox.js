@@ -22,15 +22,15 @@ export default function ColorBox({
     >
       <div style={{ background: color }} className="ColorBox">
         <div
-          className={`copy-overlay ${copied && "show"}`}
+          className={`copy-overlay ${copied ? "show" : undefined}`}
           style={{ background: color }}
         />
         <div
-          className={`copy-message ${copied && "show"}`}
+          className={`copy-message ${copied ? "show" : undefined}`}
           style={{ background: color }}
         >
           <h1>Copied!</h1>
-          <p className={isLightColor && "dark-text"}>{color}</p>
+          <p className={isLightColor ? "dark-text" : undefined}>{color}</p>
         </div>
         <div className="copy-container">
           <div className="box-content">
@@ -38,7 +38,9 @@ export default function ColorBox({
               {name}
             </span>
           </div>
-          <button className={`copy-button ${isLightColor && "dark-text"}`}>
+          <button
+            className={`copy-button ${isLightColor ? "dark-text" : undefined}`}
+          >
             Copy
           </button>
         </div>
@@ -47,7 +49,9 @@ export default function ColorBox({
             to={`/palette/${paletteId}/${colorId}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <span className={`see-more ${isLightColor && "dark-text"}`}>
+            <span
+              className={`see-more ${isLightColor ? "dark-text" : undefined}`}
+            >
               More
             </span>
           </Link>
