@@ -34,6 +34,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  width: "100%",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,

@@ -34,7 +34,9 @@ export default function ColorBox({
         </div>
         <div className="copy-container">
           <div className="box-content">
-            <span className={isDarkColor && "light-text"}>{name}</span>
+            <span className={isDarkColor ? "light-text" : undefined}>
+              {name}
+            </span>
           </div>
           <button className={`copy-button ${isLightColor && "dark-text"}`}>
             Copy

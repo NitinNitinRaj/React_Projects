@@ -1,4 +1,4 @@
-import MenuIcon from "@mui/icons-material/Menu";
+import { LibraryAdd } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -49,7 +49,7 @@ export default function PaletteFormNav({
                 edge="start"
                 sx={{ mr: 2, ...(open && { display: "none" }) }}
               >
-                <MenuIcon />
+                <LibraryAdd />
               </IconButton>
               <Typography variant="h6" noWrap component="div">
                 Create New Palette
