@@ -36,32 +36,6 @@ export default function PaletteFormNav({
   savePalette,
   colors,
 }) {
-  const [newPaletteName, setNewPaletteName] = useState("");
-  const [formNameError, setFormNameError] = useState();
-  const navigate = useNavigate();
-
-  const handlePaletteNameChange = (e) => {
-    setNewPaletteName(e.target.value);
-    setFormNameError(null);
-  };
-
-  const handleSavePalette = () => {
-    if (!newPaletteName.length) return setFormNameError("empty");
-    if (
-      palettes.find(
-        (palette) =>
-          palette.paletteName.toLowerCase() === newPaletteName.toLowerCase()
-      )
-    )
-      return setFormNameError("exits");
-    savePalette({
-      id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-      paletteName: newPaletteName,
-      colors,
-    });
-    navigate("/");
-  };
-
   return (
     <>
       <CssBaseline />
@@ -85,10 +59,9 @@ export default function PaletteFormNav({
           </div>
           <div className="flex flex-row items-center">
             <PaletteMetaForm
-              handleSavePalette={handleSavePalette}
-              handlePaletteNameChange={handlePaletteNameChange}
-              formNameError={formNameError}
-              newPaletteName={newPaletteName}
+              savePalette={savePalette}
+              palettes={palettes}
+              colors={colors}
             />
             <Link to="/" className="mx-2">
               <Button variant="contained" color="warning">

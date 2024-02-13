@@ -9,14 +9,31 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function PaletteMetaForm({
-  formNameError,
-  newPaletteName,
-  handlePaletteNameChange,
-  handleSavePalette,
-}) {
+export default function PaletteMetaForm({ palettes, savePalette, colors }) {
   const [open, setOpen] = useState(false);
+  const [emojiOpen, setEmojiOpen] = useState(false);
+  const [newPaletteName, setNewPaletteName] = useState("");
+  const [formNameError, setFormNameError] = useState();
+  const navigate = useNavigate();
+
+  const handlePaletteNameChange = (e) => {
+    setNewPaletteName(e.target.value);
+    setFormNameError(null);
+  };
+
+  const handleSavePalette = () => {
+    if (!newPaletteName.length) return setFormNameError("empty");
+    if (
+      palettes.find(
+        (palette) =>
+          palette.paletteName.toLowerCase() === newPaletteName.toLowerCase()
+      )
+    )
+      return setFormNameError("exits");
+    setEmojiOpen(true);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,6 +43,17 @@ export default function PaletteMetaForm({
     setOpen(false);
   };
 
+  const handleEmojiClose = (e) => {
+    setEmojiOpen(false);
+    savePalette({
+      id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+      paletteName: newPaletteName,
+      colors,
+      emoji: e.native,
+    });
+    navigate("/");
+  };
+
   return (
     <>
       {!open && (
@@ -33,13 +61,16 @@ export default function PaletteMetaForm({
           Save
         </Button>
       )}
+      <Dialog open={emojiOpen}>
+        <Picker data={data} onEmojiSelect={handleEmojiClose} theme="light" />
+      </Dialog>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Choose a Palette Name</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter a name for your new palette. Make sure it's unique!.
           </DialogContentText>
-          <Picker data={data} onEmojiSelect={console.log} theme="light" />
+
           <FormControl
             error={formNameError && true}
             variant="standard"
