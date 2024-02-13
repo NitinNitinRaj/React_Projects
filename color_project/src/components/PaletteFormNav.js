@@ -15,7 +15,7 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const drawerWidth = 400;
+const drawerWidth = 350;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -71,48 +71,54 @@ export default function PaletteFormNav({
     <>
       <CssBaseline />
       <AppBar position="fixed" open={open} color="default">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
-          <FormControl error={formNameError && true} variant="standard">
-            <InputLabel htmlFor="component-error">Palette Name</InputLabel>
-            <Input
-              id="component-error"
-              value={newPaletteName}
-              aria-describedby="component-error-text"
-              onChange={handlePaletteNameChange}
-            />
-            {formNameError && (
-              <FormHelperText id="component-error-text">
-                {formNameError === "exits"
-                  ? "Palette Name already Used!"
-                  : "Enter Palette Name"}
-              </FormHelperText>
-            )}
-          </FormControl>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSavePalette}
-          >
-            Save Palette
-          </Button>
-          <Link to="/">
-            <Button variant="contained" color="secondary">
-              Go Back
+        <div className="flex flex-row justify-between items-center">
+          <div>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: "none" }) }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div">
+                Create New Palette
+              </Typography>
+            </Toolbar>
+          </div>
+          <div className="flex flex-row items-center">
+            <FormControl error={formNameError && true} variant="standard">
+              <InputLabel htmlFor="component-error">Palette Name</InputLabel>
+              <Input
+                id="component-error"
+                value={newPaletteName}
+                aria-describedby="component-error-text"
+                onChange={handlePaletteNameChange}
+              />
+              {formNameError && (
+                <FormHelperText id="component-error-text">
+                  {formNameError === "exits"
+                    ? "Palette Name already Used!"
+                    : "Enter Palette Name"}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSavePalette}
+            >
+              Save Palette
             </Button>
-          </Link>
-        </Toolbar>
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go Back
+              </Button>
+            </Link>
+          </div>
+        </div>
       </AppBar>
     </>
   );

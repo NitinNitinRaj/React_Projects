@@ -11,7 +11,7 @@ import ColorPickerForm from "./ColorPickerForm";
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
 
-const drawerWidth = 400;
+const drawerWidth = 350;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -86,6 +86,8 @@ export default function NewPaletteForm({ savePalette, palettes }) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
           },
         }}
         variant="persistent"
@@ -98,25 +100,35 @@ export default function NewPaletteForm({ savePalette, palettes }) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
-          <Button variant="contained" color="secondary" onClick={clearColors}>
-            Clear Palette
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={addRandomColor}
-            disabled={paletteIsFull}
-          >
-            Random Color
-          </Button>
+        <div className="w-[90%] flex flex-col justify-center items-center h-full">
+          <Typography variant="h4" gutterBottom>
+            Design Your Palette
+          </Typography>
+          <div className="w-full">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={clearColors}
+              className="w-1/2"
+            >
+              Clear Palette
+            </Button>
+            <Button
+              className="w-1/2"
+              variant="contained"
+              color="primary"
+              onClick={addRandomColor}
+              disabled={paletteIsFull}
+            >
+              Random Color
+            </Button>
+          </div>
+          <ColorPickerForm
+            paletteIsFull={paletteIsFull}
+            colors={colors}
+            setColors={setColors}
+          />
         </div>
-        <ColorPickerForm
-          paletteIsFull={paletteIsFull}
-          colors={colors}
-          setColors={setColors}
-        />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

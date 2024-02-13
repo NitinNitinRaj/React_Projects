@@ -9,7 +9,7 @@ import Chrome from "@uiw/react-color-chrome";
 import { useState } from "react";
 
 export default function ColorPickerForm({ paletteIsFull, colors, setColors }) {
-  const [currentColor, setCurrentColor] = useState("#abcdef");
+  const [currentColor, setCurrentColor] = useState("#aaaaaa");
   const [newName, setNewName] = useState("");
   const [error, setError] = useState();
 
@@ -38,31 +38,39 @@ export default function ColorPickerForm({ paletteIsFull, colors, setColors }) {
       <Chrome
         color={currentColor}
         onChange={(newColor) => updateCurrentColor(newColor)}
+        style={{ width: "100% !important" }}
+        className="my-6"
       />
       <FormControl error={error && true} variant="standard">
-        <InputLabel htmlFor="component-error">New Color</InputLabel>
+        <InputLabel htmlFor="component-error">Color Name</InputLabel>
         <Input
           id="component-error"
           value={newName}
           aria-describedby="component-error-text"
           onChange={handleNewNameChange}
+          className="w-[310px] h-[40px] "
+          variant="filled"
         />
         {error && (
           <FormHelperText id="component-error-text">
             {error === "exits" ? "Color already Used!" : "Enter a Color"}
           </FormHelperText>
         )}
-
-        <Button
-          style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
-          variant="contained"
-          color="primary"
-          onClick={addNewColor}
-          disabled={paletteIsFull}
-        >
-          {paletteIsFull ? "Palette Is Full" : "Add Color"}
-        </Button>
       </FormControl>
+      <Button
+        style={{
+          backgroundColor: paletteIsFull ? "grey" : currentColor,
+          fontSize: "1.5rem",
+          marginTop: "2rem",
+        }}
+        variant="contained"
+        color="primary"
+        onClick={addNewColor}
+        disabled={paletteIsFull}
+        className="w-[310px] h-14"
+      >
+        {paletteIsFull ? "Palette Full" : "Add Color"}
+      </Button>
     </>
   );
 }
