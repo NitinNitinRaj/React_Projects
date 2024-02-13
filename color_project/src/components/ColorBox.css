@@ -22,6 +22,18 @@
 
 .SingleColorPalette .ColorBox {
   height: 50%;
+  @media (max-width: 1200px) {
+    width: 50%;
+    height: 20%;
+  }
+  @media (max-width: 800px) {
+    width: 50%;
+    height: 20%;
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 10%;
+  }
 }
 
 .copy-button,
