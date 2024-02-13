@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 
-export default function PaletteList({ palettes }) {
+export default function PaletteList({ palettes, deletePalette }) {
   const navigate = useNavigate();
 
   const goToPalette = (id) => {
@@ -21,6 +21,7 @@ export default function PaletteList({ palettes }) {
               key={palette.paletteName}
               {...palette}
               handleClick={goToPalette}
+              deletePalette={deletePalette}
             />
           ))}
         </div>

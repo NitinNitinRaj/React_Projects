@@ -22,9 +22,19 @@ export default function App() {
     window.localStorage.setItem("palettes", JSON.stringify(palettes));
   };
 
+  const deletePalette = (id) => {
+    setPalettes(palettes.filter((p) => p.id !== id));
+  };
+
   return (
     <Routes>
-      <Route exact path="/" element={<PaletteList palettes={palettes} />} />
+      <Route
+        exact
+        path="/"
+        element={
+          <PaletteList palettes={palettes} deletePalette={deletePalette} />
+        }
+      />
       <Route
         exact
         path="/palette/new"
