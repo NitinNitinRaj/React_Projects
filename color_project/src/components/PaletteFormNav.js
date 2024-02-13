@@ -96,8 +96,8 @@ export default function PaletteFormNav({
               formNameError={formNameError}
               newPaletteName={newPaletteName}
             />
-            <Link to="/">
-              <Button variant="contained" color="secondary">
+            <Link to="/" className="mx-2">
+              <Button variant="contained" color="warning">
                 Go Back
               </Button>
             </Link>

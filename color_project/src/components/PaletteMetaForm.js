@@ -25,31 +25,23 @@ export default function PaletteMetaForm({
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: "form",
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
-            handleClose();
-          },
-        }}
-      >
-        <DialogTitle>Subscribe</DialogTitle>
+      {!open && (
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          Save
+        </Button>
+      )}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Choose a Palette Name</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            Please enter a name for your new palette. Make sure it's unique!.
           </DialogContentText>
-          <FormControl error={formNameError && true} variant="standard">
+          <FormControl
+            error={formNameError && true}
+            variant="standard"
+            fullWidth
+            margin="normal"
+          >
             <InputLabel htmlFor="component-error">Palette Name</InputLabel>
             <Input
               id="component-error"
@@ -67,6 +59,7 @@ export default function PaletteMetaForm({
           </FormControl>
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button
             variant="contained"
             color="primary"
