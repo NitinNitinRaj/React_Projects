@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import PaletteMetaForm from "./PaletteMetaForm";
 
 const drawerWidth = 350;
 
@@ -89,29 +90,12 @@ export default function PaletteFormNav({
             </Toolbar>
           </div>
           <div className="flex flex-row items-center">
-            <FormControl error={formNameError && true} variant="standard">
-              <InputLabel htmlFor="component-error">Palette Name</InputLabel>
-              <Input
-                id="component-error"
-                value={newPaletteName}
-                aria-describedby="component-error-text"
-                onChange={handlePaletteNameChange}
-              />
-              {formNameError && (
-                <FormHelperText id="component-error-text">
-                  {formNameError === "exits"
-                    ? "Palette Name already Used!"
-                    : "Enter Palette Name"}
-                </FormHelperText>
-              )}
-            </FormControl>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSavePalette}
-            >
-              Save Palette
-            </Button>
+            <PaletteMetaForm
+              handleSavePalette={handleSavePalette}
+              handlePaletteNameChange={handlePaletteNameChange}
+              formNameError={formNameError}
+              newPaletteName={newPaletteName}
+            />
             <Link to="/">
               <Button variant="contained" color="secondary">
                 Go Back
