@@ -32,6 +32,7 @@ export default function PaletteMetaForm({ palettes, savePalette, colors }) {
       )
     )
       return setFormNameError("exits");
+    setOpen(false);
     setEmojiOpen(true);
   };
 
