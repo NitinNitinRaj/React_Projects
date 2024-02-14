@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
+import seedColors from "../utils/seedColors";
 import ColorPickerForm from "./ColorPickerForm";
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
@@ -44,7 +45,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function NewPaletteForm({ savePalette, palettes }) {
   const maxPalette = 20;
   const [open, setOpen] = useState(false);
-  const [colors, setColors] = useState(palettes[0].colors);
+  const [colors, setColors] = useState(seedColors[0].colors);
   const paletteIsFull = colors.length >= maxPalette;
 
   const handleDrawerOpen = () => {

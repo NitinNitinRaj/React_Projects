@@ -6,6 +6,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import Chrome from "@uiw/react-color-chrome";
+import chroma from "chroma-js";
 import { useState } from "react";
 
 export default function ColorPickerForm({ paletteIsFull, colors, setColors }) {
@@ -33,6 +34,9 @@ export default function ColorPickerForm({ paletteIsFull, colors, setColors }) {
   const handleNewNameChange = (e) => {
     setNewName(e.target.value);
   };
+
+  const isLightColor = chroma(currentColor).luminance() >= 0.5;
+
   return (
     <>
       <Chrome
@@ -62,6 +66,7 @@ export default function ColorPickerForm({ paletteIsFull, colors, setColors }) {
           backgroundColor: paletteIsFull ? "grey" : currentColor,
           fontSize: "1.5rem",
           marginTop: "2rem",
+          color: isLightColor ? "rgba(0,0,0,0.5)" : "white",
         }}
         variant="contained"
         color="primary"
