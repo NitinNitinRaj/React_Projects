@@ -26,7 +26,9 @@ export default function Navbar({
               step={100}
               styles={{
                 track: { backgroundColor: "transparent" },
-                rail: { height: "8px" },
+                rail: {
+                  height: "8px",
+                },
                 handle: {
                   backgroundColor: "green",
                   outline: "none",
