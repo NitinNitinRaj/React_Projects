@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import NewPaletteForm from "./components/NewPaletteFrom";
+import Page from "./components/Page";
 import PaletteList from "./components/PaletteList";
 import PaletteWrapper from "./components/PaletteWrapper";
 import SingleColorPaletteWrapper from "./components/SingleColorPaletteWrapper";
 import seedColors from "./utils/seedColors";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import Page from "./components/Page";
 
 export default function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
@@ -17,13 +17,13 @@ export default function App() {
     setPalettes([...palettes, newPalette]);
   };
 
-  useEffect(() => {
-    syncLocalStorage();
+  const syncLocalStorage = useCallback(() => {
+    window.localStorage.setItem("palettes", JSON.stringify(palettes));
   }, [palettes]);
 
-  const syncLocalStorage = () => {
-    window.localStorage.setItem("palettes", JSON.stringify(palettes));
-  };
+  useEffect(() => {
+    syncLocalStorage();
+  }, [syncLocalStorage]);
 
   const deletePalette = (id) => {
     setPalettes(palettes.filter((p) => p.id !== id));

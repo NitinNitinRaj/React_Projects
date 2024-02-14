@@ -1,8 +1,8 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import "./NavBar.css";
 import { Link } from "react-router-dom";
+import "./NavBar.css";
 export default function Navbar({
   level,
   changeLevel,

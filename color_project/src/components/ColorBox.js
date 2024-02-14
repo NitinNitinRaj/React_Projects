@@ -1,8 +1,8 @@
+import chroma from "chroma-js";
 import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import "./ColorBox.css";
 import { Link } from "react-router-dom";
-import chroma from "chroma-js";
+import "./ColorBox.css";
 
 export default function ColorBox({
   background: { color, name, paletteId, colorId },
