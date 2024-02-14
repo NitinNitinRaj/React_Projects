@@ -24,7 +24,7 @@ export default function MiniPalette({
   return (
     <div
       onClick={() => handleClick(id)}
-      className="bg-white border border-solid border-black rounded p-2 relative overflow-hidden hover:cursor-pointer h-[150px] group"
+      className="bg-white border border-solid border-black rounded p-2 relative overflow-hidden hover:cursor-pointer h-[160px] group"
     >
       <Delete
         onClick={handleDeleteClick}
@@ -35,7 +35,7 @@ export default function MiniPalette({
       <div className="bg-[#dae1e4] h-[105px] w-full rounded overflow-hidden">
         {miniColorBoxes}
       </div>
-      <p className="flex justify-between items-center m-0 text-black text-sm pb-1 relative">
+      <p className="flex justify-between items-center m-0 text-black text-sm pt-1 relative">
         {paletteName} <span className="ml-2 text-2xl">{emoji}</span>
       </p>
     </div>

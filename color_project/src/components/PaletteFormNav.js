@@ -52,7 +52,7 @@ export default function PaletteFormNav({
                 <LibraryAdd />
               </IconButton>
               <Typography variant="h6" noWrap component="div">
-                Create New Palette
+                Create Palette
               </Typography>
             </Toolbar>
           </div>
