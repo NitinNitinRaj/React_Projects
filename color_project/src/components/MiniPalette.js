@@ -1,6 +1,7 @@
 import { Delete } from "@mui/icons-material";
+import { memo } from "react";
 
-export default function MiniPalette({
+function MiniPalette({
   paletteName,
   emoji,
   colors,
@@ -41,3 +42,7 @@ export default function MiniPalette({
     </div>
   );
 }
+
+export default memo(MiniPalette, (prevProps, nextProps) => {
+  return JSON.stringify(prevProps) === JSON.stringify(nextProps);
+});
