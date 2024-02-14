@@ -34,8 +34,8 @@
   width: 340px;
   margin: 0 10px;
   display: inline-block;
-  @media (max-width: 800px) {
-    width: 150px;
+  @media (max-width: 650px) {
+    width: 200px;
   }
 }
 
