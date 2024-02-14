@@ -6,7 +6,7 @@ export default function MiniPalette({
   colors,
   handleClick,
   id,
-  deletePalette,
+  handleOpen,
 }) {
   const miniColorBoxes = colors.map(({ name, color }) => (
     <div
@@ -18,7 +18,7 @@ export default function MiniPalette({
 
   const handleDeleteClick = (e) => {
     e.stopPropagation();
-    deletePalette(id);
+    handleOpen(id);
   };
 
   return (
