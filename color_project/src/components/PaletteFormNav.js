@@ -62,7 +62,7 @@ export default function PaletteFormNav({
               palettes={palettes}
               colors={colors}
             />
-            <Link to="/" className="mx-2">
+            <Link to="/" className="mx-2 items-center">
               <Button variant="contained" color="warning">
                 Go Back
               </Button>
